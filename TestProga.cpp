@@ -1,5 +1,6 @@
 #include <iostream>
 #include <queue>
+#include <vector>
 
 void sort(std::queue<int>& queue4)
 {
@@ -7,6 +8,7 @@ void sort(std::queue<int>& queue4)
 	while (!queue4.empty())
 	{
 		vect.push_back(queue4.front());
+		queue4.pop();
 	}
 	std::sort(vect.begin(), vect.end());
 	for (int i : vect)
@@ -23,10 +25,12 @@ std::queue<int> makeQueues(std::queue<int>& queue1, std::queue<int>& queue2)
 		if (queue1.front() < queue2.front())
 		{
 			queue3.push(queue1.front());
+			queue1.pop();
 		}
 		else
 		{
 			queue3.push(queue2.front());
+			queue2.pop();
 		}
 		
 	}
@@ -37,6 +41,7 @@ std::queue<int> makeQueues(std::queue<int>& queue1, std::queue<int>& queue2)
 int main()
 {
     std::cout << "Hello World!\n";
+	setlocale(LC_ALL, "");
 
 	std::queue<int> queue1;
 	std::cout << "Введите элементы очереди 1" << std::endl;
@@ -59,4 +64,9 @@ int main()
 	std::queue<int> makeQueue = makeQueues(queue1, queue2);
 	sort(makeQueue);
 	std::cout << "Объединённая очередь - ";
+	while (!makeQueue.empty())
+	{
+		std::cout << makeQueue.front();
+		makeQueue.pop();
+	}
 }
